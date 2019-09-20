@@ -1,0 +1,10 @@
+{"controllers":[
+    {
+    "avi_controller":"10.144.73.205",
+    "location":"datacenter1",
+    "environment":"production",
+    "avi_user":"admin",
+    "_comment":"ACCEPTS PLAIN TEXT OR BASE64 ENCODED PASSWORD",
+    "avi_pass":"AviDemo1!"
+    }]
+}
