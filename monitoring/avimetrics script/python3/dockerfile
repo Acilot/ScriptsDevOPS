@@ -21,21 +21,14 @@ ENV EN_DOCKER=True
 
 # Install python requirements
 RUN apk add --no-cache python3 python3-dev py3-pip
-RUN pip3 install --no-cache-dir requests
+RUN pip3 install --no-cache-dir requests pyyaml
 
 
 # Copy scripts to directory
-COPY "appdynamics_http.json" "/usr/src/avi"
-COPY "avi_controllers.json" "/usr/src/avi"
+COPY "configuration_example.yaml" "/usr/src/avi"
 COPY "avimetrics.py" "/usr/src/avi"
-COPY "datadog.json" "/usr/src/avi"
-COPY "elasticsearch.json" "/usr/src/avi"
-COPY "graphite_host.json" "/usr/src/avi"
-COPY "influxdb.json" "/usr/src/avi"
-COPY "logstash.json" "/usr/src/avi"
-COPY "logstash.readme" "/usr/src/avi"
 COPY "metrics_endpoints.py" "/usr/src/avi"
-COPY "splunk_host.json" "/usr/src/avi"
+
 
 
 
