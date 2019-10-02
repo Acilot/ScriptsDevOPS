@@ -42,6 +42,24 @@ The metrics script will look in the local directory for the configuration.yaml f
 $ python3 avimetrics.py
 ```
 
+
+# Run as a container
+To run this script as a container, modify the files as exampled above prior to building.
+
+### Build the container
+```sh
+$ docker build -t avimetrics .
+```
+### Start the container
+To start the container it is required to specify the configuration via the <strong>EN_CONFIGURATION</strong> environment variable.  
+
+Here is an example for using the contents of a local configuration.yaml as the value for EN_CONFIGURATION when creating the local container.
+
+```sh
+$ docker run -d --name avimetrics --restart always --log-opt max-size=1m -e "EN_CONFIGURATION=$(<configuration.yaml)"  avinetworks/avimetrics
+```
+
+
 # configuration.yaml
 
 The configuration.yaml file will include the parameters to define what data values are desired for each Avi Controller cluster.  Within the configuration.yaml file, you will define controller(s) within a list under the key "controllers".  For each controller entry the following values are available:
@@ -1846,21 +1864,7 @@ controllers:
 
 
 
-# Run as a container
-To run this script as a container, modify the files as exampled above prior to building.
 
-### Build the container
-```sh
-$ docker build -t avimetrics .
-```
-### Start the container
-To start the container it is required to specify the configuration via the <strong>EN_CONFIGURATION</strong> environment variable.  
-
-Here is an example for using the contents of a local configuration.yaml as the value for EN_CONFIGURATION when creating the local container.
-
-```sh
-$ docker run -d --name avimetrics --restart always --log-opt max-size=1m -e "EN_CONFIGURATION=$(<configuration.yaml)"  avinetworks/avimetrics
-```
 
 # Default Metrics Being Collected
 
