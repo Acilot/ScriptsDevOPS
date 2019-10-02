@@ -199,3 +199,4 @@ monitoring/graphite/avi-metric-script-graphite-OLD.py
 
 # Allow avi_proxy Makefile
 !tools/avi_proxy/Makefile
+monitoring/avimetrics script/.vscode/settings.json

@@ -19,9 +19,9 @@ controllers:
             - l4_client.avg_tx_bytes
             - l7_client.avg_ssl_handshakes_new
      serviceengine_stats_config:
-         serviceengine_metrics: True
-         serviceengine_runtime: True
-         serviceengine_realtime: True
+         serviceengine_metrics: False
+         serviceengine_runtime: False
+         serviceengine_realtime: False
      pool_stats_config:
          pool_metrics: True
          pool_runtime: True
@@ -36,7 +36,7 @@ controllers:
      metrics_endpoint_config:
          influxdb:
              enable: True
-             server: 172.17.0.2
+             server: 172.17.0.4
              server_port: 8086
              protocol: http
              db: avi
@@ -50,8 +50,8 @@ controllers:
              enable: True
              instance: longboard.wavefront.com
              api_key: 68e639fe-be9c-439f-8ebf-ea1422a9ddb0
-             
-             
+
+
 
 
 
@@ -144,8 +144,8 @@ splunk:
 wavefront:
     enable: False
     instance: xxxxxxxx.wavefront.com
-    #_comment:  If using direct ingestion specify an api_key, if not key then wavefront proxy will be used
-    #api_key: 68e639fe-be9c-439f-8ebf-ea1422a9ddb0
+    #_comment:  If using direct ingestion specify an api_key, if no key then wavefront proxy will be used
+    #api_key: 12a345bc-de6f-789a-0bcd-ef1234a5bcd6
     #_comment:  If using proxy specify the listening port, if not defined defaults to 2878
     #proxy_port: 2878
 #
