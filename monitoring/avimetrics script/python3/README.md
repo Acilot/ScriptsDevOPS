@@ -56,7 +56,7 @@ To start the container it is required to specify the configuration via the <stro
 Here is an example for using the contents of a local configuration.yaml as the value for EN_CONFIGURATION when creating the local container.
 
 ```sh
-$ docker run -d --name avimetrics --restart always --log-opt max-size=1m -e "EN_CONFIGURATION=$(<configuration.yaml)"  avinetworks/avimetrics
+$ docker run -d --name avimetrics --restart always --log-opt max-size=1m -e "EN_CONFIGURATION=$(<configuration.yaml)"  avinetworks/avimetrics:3
 ```
 
 
