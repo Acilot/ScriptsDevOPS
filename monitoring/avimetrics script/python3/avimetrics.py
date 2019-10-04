@@ -1191,23 +1191,25 @@ class avi_metrics():
             endpoint_payload_list = []
             discovered = []
             for v in self.vs_dict:
-                if 'service_engine' in self.vs_dict[v]['results']['runtime']['vip_summary']:
+                if 'service_engine' in self.vs_dict[v]['results']['runtime']['vip_summary'][0]:
                     vs_name = self.vs_dict[v]['name']
-                    for s in self.vs_dict[v]['results']['runtime']['vip_summary']['serviceengine']:
-                        temp_payload = self.payload_template.copy()
-                        temp_payload['timestamp']=int(time.time())
-                        temp_payload['se_name'] = s['url'].rsplit('#',1)[1]
-                        temp_payload['vs_name'] = vs_name
-                        temp_payload['tenant'] = self.vs_dict[v]['tenant']
-                        temp_payload['cloud'] = self.vs_dict[v]['cloud']
-                        temp_payload['se_group'] = self.vs_dict[v]['se_group']
-                        temp_payload['metric_type'] = 'virtualservice_hosted_se'
-                        temp_payload['metric_name'] = 'hosting_se'
-                        temp_payload['metric_value'] = 1
-                        temp_payload['name_space'] = 'avi||'+self.avi_cluster_name+'||virtualservice||%s||serviceengine||%s' %(vs_name, se_name)
-                        if temp_payload not in discovered:
-                            discovered.append(temp_payload)
-                            endpoint_payload_list.append(temp_payload)
+                    for r in self.vs_dict[v]['results']['runtime']['vip_summary']:
+                        for s in r['service_engine']:
+                            se_name = s['url'].rsplit('#',1)[1]
+                            temp_payload = self.payload_template.copy()
+                            temp_payload['timestamp']=int(time.time())
+                            temp_payload['se_name'] = se_name
+                            temp_payload['vs_name'] = vs_name
+                            temp_payload['tenant'] = self.vs_dict[v]['tenant']
+                            temp_payload['cloud'] = self.vs_dict[v]['cloud']
+                            temp_payload['se_group'] = self.vs_dict[v]['se_group']
+                            temp_payload['metric_type'] = 'virtualservice_hosted_se'
+                            temp_payload['metric_name'] = 'hosting_se'
+                            temp_payload['metric_value'] = 1
+                            temp_payload['name_space'] = 'avi||'+self.avi_cluster_name+'||virtualservice||%s||serviceengine||%s' %(vs_name, se_name)
+                            if temp_payload not in discovered:
+                                discovered.append(temp_payload)
+                                endpoint_payload_list.append(temp_payload)
             if len(endpoint_payload_list) > 0:
                 send_metriclist_to_endpoint(self.endpoint_list, endpoint_payload_list)
             temp_total_time = str(time.time()-temp_start_time)
